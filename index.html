@@ -1,64 +1,627 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href"style.css">
     <meta charset="UTF-8">
-    <meta name="viewport"content="width=device-width, initial-scale=1.0">
-    <title>Piyush | My Websites</title>
-    <link rel="stylesheet"  href="style.css">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="Piyush Rajbhar - Computer Science Student, Web Developer and Python Learner."
+    >
+
+    <meta
+        name="keywords"
+        content="Piyush Rajbhar, portfolio, web developer, Python, JavaScript, computer science"
+    >
+
+    <meta name="author" content="Piyush Rajbhar">
+
+    <title>Piyush Rajbhar | Portfolio</title>
+
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <nav>
-        <h2>Piyush</h2>
 
-        <div>
+    <!-- Background Particles -->
+    <div class="particles"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+
+        <div class="logo">
+            Piyush<span>.</span>
+        </div>
+
+        <button
+            class="menu-btn"
+            id="menuBtn"
+            aria-label="Open Menu"
+        >
+            ☰
+        </button>
+
+        <div class="nav-links" id="navLinks">
+
             <a href="#home">Home</a>
             <a href="#about">About</a>
             <a href="#skills">Skills</a>
-            <a href="#contact">Contact</a>   
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+
+            <button
+                class="theme-btn"
+                id="themeBtn"
+                aria-label="Change Theme"
+            >
+                🌙
+            </button>
+
         </div>
+
     </nav>
-    <section id =home" class=hero">
-        <h1>Hello, I am Piyush</h1>
 
-        <p>
-            computer science student & web development learner
-        </p>
-        <button oneclick="sayhello()">Say hello</button>
-    </section>"
 
-    <section id="About">
-        <h2>About me</h2>
-        <p> I am a computer science student interested in programming, web development and tecnology.
-        </p>
+    <!-- ================= HOME ================= -->
+
+    <section id="home" class="hero">
+
+        <div class="hero-content">
+
+            <p class="small-title">WELCOME TO MY PORTFOLIO</p>
+
+            <h1>
+                Hi, I'm
+                <span class="gradient-text">
+                    Piyush Rajbhar
+                </span>
+            </h1>
+
+            <h2>
+                I'm a
+                <span id="typing"></span>
+            </h2>
+
+            <p class="hero-description">
+                I am a Computer Science student passionate about
+                programming, web development, Python and
+                cybersecurity.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#projects" class="btn-link">
+                    <button class="primary-btn">
+                        View Projects
+                    </button>
+                </a>
+
+                <a href="#contact" class="btn-link">
+                    <button class="outline-btn">
+                        Contact Me
+                    </button>
+                </a>
+
+            </div>
+
+            <div class="social-links">
+
+                <a
+                    href="https://github.com/rajbharpiyush93-arch"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    GitHub
+                </a>
+
+                <span>•</span>
+
+                <a
+                    href="#contact"
+                >
+                    Contact
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="scroll-down">
+            ↓ Scroll Down
+        </div>
+
     </section>
 
-    <section id="skills">
-        <h2>My Skills></h2>
-        <div class="skills">
-            <div>HTML</div>
-            <div>CSS</div>
-            <div>Java Script</div>
-            <div>Python</div>
-        </div>    
-    </section>
-    <section id="contact">
-        <h2>contact me</h2>
-        <from>
-            <input type="text" placeholder="your name"required>
-            <input type="email" placeholder="your email"required>
-            <textarea placeholdre="your message"reqired></textarea>
-            <button type="submit">send message</button>
 
-        </from>
+    <!-- ================= ABOUT ================= -->
+
+    <section id="about" class="section reveal">
+
+        <div class="section-title">
+
+            <p>GET TO KNOW ME</p>
+
+            <h2>About Me</h2>
+
+            <span></span>
+
+        </div>
+
+        <div class="about-container">
+
+            <div class="about-card">
+
+                <div class="card-icon">
+                    💻
+                </div>
+
+                <h3>Who I Am</h3>
+
+                <p>
+                    I am Piyush Rajbhar, a Computer Science student
+                    interested in technology, programming and
+                    software development.
+                </p>
+
+            </div>
+
+
+            <div class="about-card">
+
+                <div class="card-icon">
+                    🚀
+                </div>
+
+                <h3>My Goal</h3>
+
+                <p>
+                    My goal is to become a skilled software developer
+                    and build useful, modern and real-world
+                    applications.
+                </p>
+
+            </div>
+
+
+            <div class="about-card">
+
+                <div class="card-icon">
+                    🔐
+                </div>
+
+                <h3>My Interests</h3>
+
+                <p>
+                    I enjoy learning Web Development, Python,
+                    Linux, Networking and Ethical Cybersecurity.
+                </p>
+
+            </div>
+
+        </div>
+
     </section>
+
+
+    <!-- ================= SKILLS ================= -->
+
+    <section id="skills" class="section reveal">
+
+        <div class="section-title">
+
+            <p>WHAT I LEARN</p>
+
+            <h2>My Skills</h2>
+
+            <span></span>
+
+        </div>
+
+        <div class="skills-container">
+
+
+            <div class="skill-item">
+
+                <div class="skill-header">
+                    <span>HTML</span>
+                    <span>90%</span>
+                </div>
+
+                <div class="progress">
+                    <div
+                        class="progress-bar html"
+                    ></div>
+                </div>
+
+            </div>
+
+
+            <div class="skill-item">
+
+                <div class="skill-header">
+                    <span>CSS</span>
+                    <span>80%</span>
+                </div>
+
+                <div class="progress">
+                    <div
+                        class="progress-bar css"
+                    ></div>
+                </div>
+
+            </div>
+
+
+            <div class="skill-item">
+
+                <div class="skill-header">
+                    <span>JavaScript</span>
+                    <span>65%</span>
+                </div>
+
+                <div class="progress">
+                    <div
+                        class="progress-bar javascript"
+                    ></div>
+                </div>
+
+            </div>
+
+
+            <div class="skill-item">
+
+                <div class="skill-header">
+                    <span>Python</span>
+                    <span>70%</span>
+                </div>
+
+                <div class="progress">
+                    <div
+                        class="progress-bar python"
+                    ></div>
+                </div>
+
+            </div>
+
+
+            <div class="skill-item">
+
+                <div class="skill-header">
+                    <span>Git & GitHub</span>
+                    <span>60%</span>
+                </div>
+
+                <div class="progress">
+                    <div
+                        class="progress-bar git"
+                    ></div>
+                </div>
+
+            </div>
+
+
+            <div class="skill-item">
+
+                <div class="skill-header">
+                    <span>Linux</span>
+                    <span>55%</span>
+                </div>
+
+                <div class="progress">
+                    <div
+                        class="progress-bar linux"
+                    ></div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= PROJECTS ================= -->
+
+    <section id="projects" class="section reveal">
+
+        <div class="section-title">
+
+            <p>MY WORK</p>
+
+            <h2>Projects</h2>
+
+            <span></span>
+
+        </div>
+
+        <div class="projects-container">
+
+
+            <div class="project-card">
+
+                <div class="project-number">
+                    01
+                </div>
+
+                <h3>
+                    🌐 Portfolio Website
+                </h3>
+
+                <p>
+                    A responsive personal portfolio website
+                    created using HTML, CSS and JavaScript.
+                </p>
+
+                <div class="tags">
+                    <span>HTML</span>
+                    <span>CSS</span>
+                    <span>JavaScript</span>
+                </div>
+
+                <a
+                    href="https://github.com/rajbharpiyush93-arch/my-website"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <button class="project-btn">
+                        View on GitHub →
+                    </button>
+                </a>
+
+            </div>
+
+
+            <div class="project-card">
+
+                <div class="project-number">
+                    02
+                </div>
+
+                <h3>
+                    🐍 Python Project
+                </h3>
+
+                <p>
+                    Python programming projects created while
+                    learning programming and problem solving.
+                </p>
+
+                <div class="tags">
+                    <span>Python</span>
+                    <span>Programming</span>
+                </div>
+
+                <button class="project-btn disabled-btn">
+                    Coming Soon
+                </button>
+
+            </div>
+
+
+            <div class="project-card">
+
+                <div class="project-number">
+                    03
+                </div>
+
+                <h3>
+                    🔐 Cybersecurity Lab
+                </h3>
+
+                <p>
+                    Learning Linux, networking and ethical
+                    cybersecurity through safe practice labs.
+                </p>
+
+                <div class="tags">
+                    <span>Linux</span>
+                    <span>Networking</span>
+                    <span>Security</span>
+                </div>
+
+                <button class="project-btn disabled-btn">
+                    Coming Soon
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CONTACT ================= -->
+
+    <section id="contact" class="section reveal">
+
+        <div class="section-title">
+
+            <p>GET IN TOUCH</p>
+
+            <h2>Contact Me</h2>
+
+            <span></span>
+
+        </div>
+
+        <div class="contact-container">
+
+
+            <div class="contact-info">
+
+                <h3>
+                    Let's work together.
+                </h3>
+
+                <p>
+                    Have a question, project idea or simply
+                    want to say hello? Send me a message.
+                </p>
+
+
+                <div class="contact-item">
+
+                    <div class="contact-icon">
+                        📧
+                    </div>
+
+                    <div>
+                        <h4>Email</h4>
+                        <p>your-email@example.com</p>
+                    </div>
+
+                </div>
+
+
+                <div class="contact-item">
+
+                    <div class="contact-icon">
+                        📍
+                    </div>
+
+                    <div>
+                        <h4>Location</h4>
+                        <p>Uttar Pradesh, India</p>
+                    </div>
+
+                </div>
+
+
+                <div class="contact-item">
+
+                    <div class="contact-icon">
+                        💻
+                    </div>
+
+                    <div>
+                        <h4>GitHub</h4>
+                        <p>github.com/rajbharpiyush93-arch</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="contact-form-container">
+
+                <form id="contactForm">
+
+                    <div class="input-group">
+
+                        <label for="name">
+                            Your Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="Enter your name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label for="email">
+                            Your Email
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Enter your email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label for="message">
+                            Your Message
+                        </label>
+
+                        <textarea
+                            id="message"
+                            rows="6"
+                            placeholder="Write your message..."
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="primary-btn full-btn"
+                    >
+                        Send Message →
+                    </button>
+
+                    <p id="formMessage"></p>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
 
     <footer>
-        <p> 2026 Piyush. All Rights Reserved.</p>
+
+        <div class="footer-content">
+
+            <h2>
+                Piyush<span>.</span>
+            </h2>
+
+            <p>
+                Building my skills one line of code at a time.
+            </p>
+
+            <div class="footer-links">
+
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+
+            </div>
+
+            <div class="footer-line"></div>
+
+            <p class="copyright">
+                © <span id="year"></span>
+                Piyush Rajbhar. All Rights Reserved.
+            </p>
+
+        </div>
+
     </footer>
 
-    <script scr="script.js"></script>
 
-</body>    
+    <!-- Scroll To Top -->
+
+    <button
+        id="topBtn"
+        aria-label="Go to top"
+    >
+        ↑
+    </button>
+
+
+    <script src="script.js"></script>
+
+</body>
 </html>
