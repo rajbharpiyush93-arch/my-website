@@ -1,347 +1,12 @@
-/* ===============================
-   MOBILE MENU
-================================ */
-
-const menuBtn = document.getElementById("menuBtn");
-const navLinks = document.getElementById("navLinks");
-
-menuBtn.addEventListener("click", function () {
-
-    navLinks.classList.toggle("active");
-
-});
-
-
-/* Close menu after clicking a link */
-
-const navItems = document.querySelectorAll(".nav-links a");
-
-navItems.forEach(function (item) {
-
-    item.addEventListener("click", function () {
-
-        navLinks.classList.remove("active");
-
-    });
-
-});
-
-
-/* ===============================
-   DARK / LIGHT MODE
-================================ */
-
-const themeBtn = document.getElementById("themeBtn");
-
-const savedTheme = localStorage.getItem("theme");
-
-if (savedTheme === "light") {
-
-    document.body.classList.add("light-mode");
-
-    themeBtn.textContent = "☀️";
-
-}
-
-
-themeBtn.addEventListener("click", function () {
-
-    document.body.classList.toggle("light-mode");
-
-    const isLight =
-        document.body.classList.contains("light-mode");
-
-
-    if (isLight) {
-
-        themeBtn.textContent = "☀️";
-
-        localStorage.setItem("theme", "light");
-
-    } else {
-
-        themeBtn.textContent = "🌙";
-
-        localStorage.setItem("theme", "dark");
-
-    }
-
-});
-
-
-/* ===============================
-   TYPING ANIMATION
-================================ */
-
-const words = [
-
-    "Web Developer",
-    "Python Learner",
-    "Programmer",
-    "Computer Science Student",
-    "Cybersecurity Learner"
-
-];
-
-
-const typingElement =
-    document.getElementById("typing");
-
-
-let wordIndex = 0;
-
-let letterIndex = 0;
-
-let deleting = false;
-
-
-function typeEffect() {
-
-    if (!typingElement) return;
-
-
-    const currentWord =
-        words[wordIndex];
-
-
-    if (!deleting) {
-
-        typingElement.textContent =
-            currentWord.substring(
-                0,
-                letterIndex + 1
-            );
-
-        letterIndex++;
-
-
-        if (
-            letterIndex ===
-            currentWord.length
-        ) {
-
-            deleting = true;
-
-            setTimeout(
-                typeEffect,
-                1500
-            );
-
-            return;
-
-        }
-
-    } else {
-
-        typingElement.textContent =
-            currentWord.substring(
-                0,
-                letterIndex - 1
-            );
-
-        letterIndex--;
-
-
-        if (letterIndex === 0) {
-
-            deleting = false;
-
-            wordIndex++;
-
-            if (
-                wordIndex === words.length
-            ) {
-
-                wordIndex = 0;
-
-            }
-
-        }
-
-    }
-
-
-    setTimeout(
-        typeEffect,
-        deleting ? 55 : 100
-    );
-
-}
-
-
-typeEffect();
-
-
-/* ===============================
-   SCROLL REVEAL ANIMATION
-================================ */
-
-const revealElements =
-    document.querySelectorAll(".reveal");
-
-
-function revealOnScroll() {
-
-    const windowHeight =
-        window.innerHeight;
-
-
-    revealElements.forEach(
-        function (element) {
-
-            const elementTop =
-                element.getBoundingClientRect().top;
-
-
-            if (
-                elementTop <
-                windowHeight - 100
-            ) {
-
-                element.classList.add("active");
-
-            }
-
-        }
-    );
-
-}
-
-
-window.addEventListener(
-    "scroll",
-    revealOnScroll
-);
-
-
-revealOnScroll();
-
-
-/* ===============================
-   SCROLL TO TOP
-================================ */
-
-const topBtn =
-    document.getElementById("topBtn");
-
-
-window.addEventListener(
-    "scroll",
-    function () {
-
-        if (window.scrollY > 400) {
-
-            topBtn.classList.add("show");
-
-        } else {
-
-            topBtn.classList.remove("show");
-
-        }
-
-    }
-);
-
-
-topBtn.addEventListener(
-    "click",
-    function () {
-
-        window.scrollTo({
-
-            top: 0,
-
-            behavior: "smooth"
-
-        });
-
-    }
-);
-
-
-/* ===============================
-   CONTACT FORM
-================================ */
-
-const contactForm =
-    document.getElementById("contactForm");
-
-const formMessage =
-    document.getElementById("formMessage");
-
-
-contactForm.addEventListener(
-    "submit",
-    function (event) {
-
-        event.preventDefault();
-
-
-        const name =
-            document.getElementById("name")
-                .value.trim();
-
-
-        const email =
-            document.getElementById("email")
-                .value.trim();
-
-
-        const message =
-            document.getElementById("message")
-                .value.trim();
-
-
-        if (
-            name === "" ||
-            email === "" ||
-            message === ""
-        ) {
-
-            formMessage.textContent =
-                "Please fill all fields.";
-
-            formMessage.style.color =
-                "#ff6b6b";
-
-            return;
-
-        }
-
-
-        formMessage.textContent =
-            "Message submitted successfully! ✅";
-
-
-        formMessage.style.color =
-            "#00d9ff";
-
-
-        contactForm.reset();
-
-    }
-);
-
-
-/* ===============================
-   CURRENT YEAR
-================================ */
-
-document.getElementById("year")
-    .textContent =
-    new Date().getFullYear();
-/* =================================
-   LOGIN PAGE
-================================= */
-
 /* =========================================
-   SUPABASE CONFIG
+   SUPABASE CONFIGURATION
 ========================================= */
 
-const SUPABASE_URL = "https://rdekemmbiqayqbpazioh.supabase.co";
+const SUPABASE_URL =
+    "YOUR_SUPABASE_PROJECT_URL";
 
 const SUPABASE_PUBLISHABLE_KEY =
-    "sb_publishable_n_W-Vj6g-KipsoJDoap4vQ_MPk8r49n";
+    "YOUR_SUPABASE_PUBLISHABLE_KEY";
 
 
 const { createClient } = window.supabase;
@@ -352,191 +17,601 @@ const supabaseClient = createClient(
 );
 
 
+
 /* =========================================
-   REAL LOGIN
+   MOBILE MENU
 ========================================= */
 
-const loginForm =
-    document.getElementById("loginForm");
+const menuBtn =
+    document.querySelector(".menu-btn");
+
+const navLinks =
+    document.querySelector(".nav-links");
 
 
-if (loginForm) {
+if (menuBtn && navLinks) {
 
-    const emailInput =
-        document.getElementById("loginEmail");
+    menuBtn.addEventListener("click", () => {
 
-    const passwordInput =
-        document.getElementById("loginPassword");
+        navLinks.classList.toggle("active");
 
-    const showPassword =
-        document.getElementById("showPassword");
+    });
 
-    const loginMessage =
-        document.getElementById("loginMessage");
-
-    const loginBtn =
-        document.getElementById("loginBtn");
-
-    const loginBtnText =
-        document.getElementById("loginBtnText");
+}
 
 
-    /* SHOW / HIDE PASSWORD */
 
-    showPassword.addEventListener("click", () => {
+/* =========================================
+   DARK / LIGHT THEME
+========================================= */
 
-        if (passwordInput.type === "password") {
+const themeToggle =
+    document.getElementById("themeToggle");
 
-            passwordInput.type = "text";
-            showPassword.textContent = "🙈";
+
+if (themeToggle) {
+
+    themeToggle.addEventListener("click", () => {
+
+        document.body.classList.toggle("light-mode");
+
+        if (
+            document.body.classList.contains("light-mode")
+        ) {
+
+            localStorage.setItem(
+                "theme",
+                "light"
+            );
 
         } else {
 
-            passwordInput.type = "password";
-            showPassword.textContent = "👁";
+            localStorage.setItem(
+                "theme",
+                "dark"
+            );
 
         }
 
     });
 
 
-    /* LOGIN */
-
-    loginForm.addEventListener("submit", async (event) => {
-
-        event.preventDefault();
-
-        const email =
-            emailInput.value.trim();
-
-        const password =
-            passwordInput.value;
+    const savedTheme =
+        localStorage.getItem("theme");
 
 
-        if (!email || !password) {
+    if (savedTheme === "light") {
 
-            loginMessage.textContent =
-                "Please enter email and password.";
+        document.body.classList.add(
+            "light-mode"
+        );
 
-            loginMessage.style.color =
-                "#ff6b6b";
+    }
 
-            return;
+}
+
+
+
+/* =========================================
+   TYPING ANIMATION
+========================================= */
+
+const typingText =
+    document.getElementById("typingText");
+
+
+if (typingText) {
+
+    const words = [
+        "Computer Science Student",
+        "Python Learner",
+        "Web Security Learner",
+        "Ethical Hacking Learner"
+    ];
+
+
+    let wordIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
+
+
+    function typeEffect() {
+
+        const currentWord =
+            words[wordIndex];
+
+
+        if (!deleting) {
+
+            typingText.textContent =
+                currentWord.substring(
+                    0,
+                    charIndex + 1
+                );
+
+            charIndex++;
+
+
+            if (
+                charIndex ===
+                currentWord.length
+            ) {
+
+                deleting = true;
+
+                setTimeout(
+                    typeEffect,
+                    1500
+                );
+
+                return;
+
+            }
+
+        } else {
+
+            typingText.textContent =
+                currentWord.substring(
+                    0,
+                    charIndex - 1
+                );
+
+            charIndex--;
+
+
+            if (charIndex === 0) {
+
+                deleting = false;
+
+                wordIndex =
+                    (wordIndex + 1) %
+                    words.length;
+
+            }
+
         }
 
 
-        loginBtn.disabled = true;
+        setTimeout(
+            typeEffect,
+            deleting ? 60 : 100
+        );
 
-        loginBtnText.textContent =
-            "Signing In...";
-
-        loginMessage.textContent = "";
-
-
-        try {
-
-            const { data, error } =
-                await supabaseClient.auth
-                    .signInWithPassword({
-
-                        email: email,
-                        password: password
-
-                    });
+    }
 
 
-            if (error) {
-                throw error;
+    typeEffect();
+
+}
+
+
+
+/* =========================================
+   SCROLL REVEAL
+========================================= */
+
+const revealElements =
+    document.querySelectorAll(
+        ".reveal"
+    );
+
+
+if (revealElements.length > 0) {
+
+    const revealObserver =
+        new IntersectionObserver(
+            (entries) => {
+
+                entries.forEach(
+                    (entry) => {
+
+                        if (
+                            entry.isIntersecting
+                        ) {
+
+                            entry.target.classList.add(
+                                "active"
+                            );
+
+                        }
+
+                    }
+                );
+
+            },
+            {
+                threshold: 0.15
+            }
+        );
+
+
+    revealElements.forEach(
+        (element) => {
+
+            revealObserver.observe(
+                element
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =========================================
+   SCROLL TO TOP
+========================================= */
+
+const scrollTopBtn =
+    document.getElementById(
+        "scrollTop"
+    );
+
+
+if (scrollTopBtn) {
+
+    window.addEventListener(
+        "scroll",
+        () => {
+
+            if (
+                window.scrollY > 400
+            ) {
+
+                scrollTopBtn.classList.add(
+                    "show"
+                );
+
+            } else {
+
+                scrollTopBtn.classList.remove(
+                    "show"
+                );
+
+            }
+
+        }
+    );
+
+
+    scrollTopBtn.addEventListener(
+        "click",
+        () => {
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+    );
+
+}
+
+
+
+/* =========================================
+   SECURITY TOPICS
+========================================= */
+
+const securityButtons =
+    document.querySelectorAll(
+        "[data-security]"
+    );
+
+
+securityButtons.forEach(
+    (button) => {
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                const topic =
+                    button.dataset.security;
+
+                alert(
+                    "Security topic: " +
+                    topic
+                );
+
+            }
+        );
+
+    }
+);
+
+
+
+/* =========================================
+   SAFE XSS AWARENESS LAB
+========================================= */
+
+const xssInput =
+    document.getElementById(
+        "xssInput"
+    );
+
+const xssOutput =
+    document.getElementById(
+        "xssOutput"
+    );
+
+const xssButton =
+    document.getElementById(
+        "xssButton"
+    );
+
+
+if (
+    xssInput &&
+    xssOutput &&
+    xssButton
+) {
+
+    xssButton.addEventListener(
+        "click",
+        () => {
+
+            const value =
+                xssInput.value;
+
+
+            /*
+             * textContent is intentionally used
+             * instead of innerHTML.
+             */
+
+            xssOutput.textContent =
+                value;
+
+        }
+    );
+
+}
+
+
+
+/* =========================================
+   PASSWORD STRENGTH LAB
+========================================= */
+
+const passwordLab =
+    document.getElementById(
+        "passwordLab"
+    );
+
+const passwordStrength =
+    document.getElementById(
+        "passwordStrength"
+    );
+
+
+if (
+    passwordLab &&
+    passwordStrength
+) {
+
+    passwordLab.addEventListener(
+        "input",
+        () => {
+
+            const password =
+                passwordLab.value;
+
+
+            let score = 0;
+
+
+            if (
+                password.length >= 8
+            ) {
+
+                score++;
+
             }
 
 
-            loginMessage.textContent =
-                "Login successful! Redirecting...";
+            if (
+                /[A-Z]/.test(password)
+            ) {
 
-            loginMessage.style.color =
-                "#00d9ff";
+                score++;
 
-
-            setTimeout(() => {
-
-                window.location.href =
-                    "dashboard.html";
-
-            }, 1000);
+            }
 
 
-        } catch (error) {
+            if (
+                /[a-z]/.test(password)
+            ) {
 
-            console.error(error);
+                score++;
 
-            loginMessage.textContent =
-                "Login failed. Check your email and password.";
-
-            loginMessage.style.color =
-                "#ff6b6b";
+            }
 
 
-        } finally {
+            if (
+                /[0-9]/.test(password)
+            ) {
 
-            loginBtn.disabled = false;
+                score++;
 
-            loginBtnText.textContent =
-                "Sign In";
+            }
+
+
+            if (
+                /[^A-Za-z0-9]/.test(password)
+            ) {
+
+                score++;
+
+            }
+
+
+            const levels = [
+                "Very Weak",
+                "Weak",
+                "Fair",
+                "Good",
+                "Strong",
+                "Very Strong"
+            ];
+
+
+            passwordStrength.textContent =
+                password
+                    ? levels[score]
+                    : "";
 
         }
+    );
 
-    });
-   /* =========================================
+}
+
+
+
+/* =========================================
+   SQL INJECTION AWARENESS
+========================================= */
+
+const sqlButton =
+    document.getElementById(
+        "sqlProtection"
+    );
+
+
+if (sqlButton) {
+
+    sqlButton.addEventListener(
+        "click",
+        () => {
+
+            alert(
+                "Use parameterized queries / prepared statements. Never build SQL queries by directly concatenating user input."
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =========================================
+   CONTACT FORM DEMO
+========================================= */
+
+const contactForm =
+    document.getElementById(
+        "contactForm"
+    );
+
+
+if (contactForm) {
+
+    contactForm.addEventListener(
+        "submit",
+        (event) => {
+
+            event.preventDefault();
+
+
+            alert(
+                "Message form submitted successfully!"
+            );
+
+
+            contactForm.reset();
+
+        }
+    );
+
+}
+
+
+
+/* =========================================
    REAL SIGNUP
 ========================================= */
 
 const signupForm =
-    document.getElementById("signupForm");
+    document.getElementById(
+        "signupForm"
+    );
 
 
 if (signupForm) {
 
     const emailInput =
-        document.getElementById("signupEmail");
+        document.getElementById(
+            "signupEmail"
+        );
 
     const passwordInput =
-        document.getElementById("signupPassword");
+        document.getElementById(
+            "signupPassword"
+        );
 
     const confirmPasswordInput =
-        document.getElementById("confirmPassword");
+        document.getElementById(
+            "confirmPassword"
+        );
 
     const showPassword =
-        document.getElementById("showSignupPassword");
+        document.getElementById(
+            "showSignupPassword"
+        );
 
     const signupMessage =
-        document.getElementById("signupMessage");
+        document.getElementById(
+            "signupMessage"
+        );
 
     const signupBtn =
-        document.getElementById("signupBtn");
+        document.getElementById(
+            "signupBtn"
+        );
 
     const signupBtnText =
-        document.getElementById("signupBtnText");
+        document.getElementById(
+            "signupBtnText"
+        );
 
 
     /* SHOW / HIDE PASSWORD */
 
-    showPassword.addEventListener("click", () => {
+    if (showPassword) {
 
-        if (passwordInput.type === "password") {
+        showPassword.addEventListener(
+            "click",
+            () => {
 
-            passwordInput.type = "text";
+                if (
+                    passwordInput.type ===
+                    "password"
+                ) {
 
-            showPassword.textContent = "🙈";
+                    passwordInput.type =
+                        "text";
 
-        } else {
+                    showPassword.textContent =
+                        "🙈";
 
-            passwordInput.type = "password";
+                } else {
 
-            showPassword.textContent = "👁";
+                    passwordInput.type =
+                        "password";
 
-        }
+                    showPassword.textContent =
+                        "👁";
 
-    });
+                }
+
+            }
+        );
+
+    }
 
 
     /* SIGNUP */
@@ -558,9 +633,12 @@ if (signupForm) {
                 confirmPasswordInput.value;
 
 
-            /* CHECK PASSWORD */
+            /* PASSWORD MATCH */
 
-            if (password !== confirmPassword) {
+            if (
+                password !==
+                confirmPassword
+            ) {
 
                 signupMessage.textContent =
                     "Passwords do not match.";
@@ -569,10 +647,15 @@ if (signupForm) {
                     "#ff6b6b";
 
                 return;
+
             }
 
 
-            if (password.length < 6) {
+            /* PASSWORD LENGTH */
+
+            if (
+                password.length < 6
+            ) {
 
                 signupMessage.textContent =
                     "Password must be at least 6 characters.";
@@ -581,6 +664,7 @@ if (signupForm) {
                     "#ff6b6b";
 
                 return;
+
             }
 
 
@@ -589,27 +673,32 @@ if (signupForm) {
             signupBtnText.textContent =
                 "Creating Account...";
 
-            signupMessage.textContent = "";
+            signupMessage.textContent =
+                "";
 
 
             try {
 
-                const { data, error } =
-                    await supabaseClient.auth.signUp({
+                const {
+                    data,
+                    error
+                } =
+                    await supabaseClient.auth
+                        .signUp({
 
-                        email: email,
+                            email: email,
 
-                        password: password,
+                            password: password,
 
-                        options: {
+                            options: {
 
-                            emailRedirectTo:
-                                window.location.origin +
-                                "/my-website/login.html"
+                                emailRedirectTo:
+                                    window.location.origin +
+                                    "/my-website/login.html"
 
-                        }
+                            }
 
-                    });
+                        });
 
 
                 if (error) {
@@ -620,7 +709,7 @@ if (signupForm) {
 
 
                 signupMessage.textContent =
-                    "Account created! Check your email to verify your account.";
+                    "Account created! Check your email for verification.";
 
                 signupMessage.style.color =
                     "#00d9ff";
@@ -633,8 +722,10 @@ if (signupForm) {
 
                 console.error(error);
 
+
                 signupMessage.textContent =
-                    error.message;
+                    error.message ||
+                    "Signup failed.";
 
                 signupMessage.style.color =
                     "#ff6b6b";
@@ -654,3 +745,296 @@ if (signupForm) {
 
 }
 
+
+
+/* =========================================
+   REAL LOGIN
+========================================= */
+
+const loginForm =
+    document.getElementById(
+        "loginForm"
+    );
+
+
+if (loginForm) {
+
+    const emailInput =
+        document.getElementById(
+            "loginEmail"
+        );
+
+    const passwordInput =
+        document.getElementById(
+            "loginPassword"
+        );
+
+    const showPassword =
+        document.getElementById(
+            "showPassword"
+        );
+
+    const loginMessage =
+        document.getElementById(
+            "loginMessage"
+        );
+
+    const loginBtn =
+        document.getElementById(
+            "loginBtn"
+        );
+
+    const loginBtnText =
+        document.getElementById(
+            "loginBtnText"
+        );
+
+
+    /* SHOW / HIDE PASSWORD */
+
+    if (showPassword) {
+
+        showPassword.addEventListener(
+            "click",
+            () => {
+
+                if (
+                    passwordInput.type ===
+                    "password"
+                ) {
+
+                    passwordInput.type =
+                        "text";
+
+                    showPassword.textContent =
+                        "🙈";
+
+                } else {
+
+                    passwordInput.type =
+                        "password";
+
+                    showPassword.textContent =
+                        "👁";
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* LOGIN */
+
+    loginForm.addEventListener(
+        "submit",
+        async (event) => {
+
+            event.preventDefault();
+
+
+            const email =
+                emailInput.value.trim();
+
+            const password =
+                passwordInput.value;
+
+
+            if (
+                !email ||
+                !password
+            ) {
+
+                loginMessage.textContent =
+                    "Please enter email and password.";
+
+                loginMessage.style.color =
+                    "#ff6b6b";
+
+                return;
+
+            }
+
+
+            loginBtn.disabled = true;
+
+            loginBtnText.textContent =
+                "Signing In...";
+
+            loginMessage.textContent =
+                "";
+
+
+            try {
+
+                const {
+                    data,
+                    error
+                } =
+                    await supabaseClient.auth
+                        .signInWithPassword({
+
+                            email: email,
+
+                            password: password
+
+                        });
+
+
+                if (error) {
+
+                    throw error;
+
+                }
+
+
+                loginMessage.textContent =
+                    "Login successful! Redirecting...";
+
+                loginMessage.style.color =
+                    "#00d9ff";
+
+
+                setTimeout(
+                    () => {
+
+                        window.location.href =
+                            "dashboard.html";
+
+                    },
+                    1000
+                );
+
+
+            } catch (error) {
+
+                console.error(error);
+
+
+                loginMessage.textContent =
+                    "Login failed: " +
+                    (
+                        error.message ||
+                        "Invalid email or password."
+                    );
+
+                loginMessage.style.color =
+                    "#ff6b6b";
+
+
+            } finally {
+
+                loginBtn.disabled = false;
+
+                loginBtnText.textContent =
+                    "Sign In";
+
+            }
+
+        }
+    );
+
+
+    /* =====================================
+       FORGOT PASSWORD
+    ===================================== */
+
+    const forgotPassword =
+        document.getElementById(
+            "forgotPassword"
+        );
+
+
+    if (forgotPassword) {
+
+        forgotPassword.addEventListener(
+            "click",
+            async (event) => {
+
+                event.preventDefault();
+
+
+                const email =
+                    emailInput.value.trim();
+
+
+                if (!email) {
+
+                    loginMessage.textContent =
+                        "Enter your email first.";
+
+                    loginMessage.style.color =
+                        "#ff6b6b";
+
+                    return;
+
+                }
+
+
+                try {
+
+                    const {
+                        error
+                    } =
+                        await supabaseClient.auth
+                            .resetPasswordForEmail(
+                                email,
+                                {
+                                    redirectTo:
+                                        window.location.origin +
+                                        "/my-website/login.html"
+                                }
+                            );
+
+
+                    if (error) {
+
+                        throw error;
+
+                    }
+
+
+                    loginMessage.textContent =
+                        "Password reset email sent. Check your inbox.";
+
+                    loginMessage.style.color =
+                        "#00d9ff";
+
+
+                } catch (error) {
+
+                    loginMessage.textContent =
+                        error.message ||
+                        "Unable to send reset email.";
+
+                    loginMessage.style.color =
+                        "#ff6b6b";
+
+                }
+
+            }
+        );
+
+    }
+
+}
+
+
+
+/* =========================================
+   CURRENT YEAR
+========================================= */
+
+const yearElement =
+    document.getElementById(
+        "year"
+    );
+
+
+if (yearElement) {
+
+    yearElement.textContent =
+        new Date().getFullYear();
+
+}
