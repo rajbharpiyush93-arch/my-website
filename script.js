@@ -334,11 +334,36 @@ document.getElementById("year")
    LOGIN PAGE
 ================================= */
 
+/* =========================================
+   SUPABASE CONFIG
+========================================= */
+
+const SUPABASE_URL = "YAHAN_PROJECT_URL_DALO";
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "YAHAN_PUBLISHABLE_KEY_DALO";
+
+
+const { createClient } = window.supabase;
+
+const supabaseClient = createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+);
+
+
+/* =========================================
+   REAL LOGIN
+========================================= */
+
 const loginForm =
     document.getElementById("loginForm");
 
 
 if (loginForm) {
+
+    const emailInput =
+        document.getElementById("loginEmail");
 
     const passwordInput =
         document.getElementById("loginPassword");
@@ -356,150 +381,109 @@ if (loginForm) {
         document.getElementById("loginBtnText");
 
 
-    /* Show / Hide password */
+    /* SHOW / HIDE PASSWORD */
 
-    showPassword.addEventListener(
-        "click",
-        function () {
+    showPassword.addEventListener("click", () => {
 
-            if (
-                passwordInput.type ===
-                "password"
-            ) {
+        if (passwordInput.type === "password") {
 
-                passwordInput.type =
-                    "text";
+            passwordInput.type = "text";
+            showPassword.textContent = "🙈";
 
-                showPassword.textContent =
-                    "🙈";
+        } else {
 
-            } else {
-
-                passwordInput.type =
-                    "password";
-
-                showPassword.textContent =
-                    "👁";
-
-            }
+            passwordInput.type = "password";
+            showPassword.textContent = "👁";
 
         }
-    );
+
+    });
 
 
-    /* Login */
+    /* LOGIN */
 
-    loginForm.addEventListener(
-        "submit",
-        function (event) {
+    loginForm.addEventListener("submit", async (event) => {
 
-            event.preventDefault();
+        event.preventDefault();
 
+        const email =
+            emailInput.value.trim();
 
-            const email =
-                document
-                    .getElementById("loginEmail")
-                    .value
-                    .trim();
+        const password =
+            passwordInput.value;
 
 
-            const password =
-                passwordInput.value;
+        if (!email || !password) {
+
+            loginMessage.textContent =
+                "Please enter email and password.";
+
+            loginMessage.style.color =
+                "#ff6b6b";
+
+            return;
+        }
 
 
-            if (!email || !password) {
+        loginBtn.disabled = true;
 
-                loginMessage.textContent =
-                    "Please enter email and password.";
+        loginBtnText.textContent =
+            "Signing In...";
 
-                loginMessage.style.color =
-                    "#ff6b6b";
+        loginMessage.textContent = "";
 
-                return;
 
+        try {
+
+            const { data, error } =
+                await supabaseClient.auth
+                    .signInWithPassword({
+
+                        email: email,
+                        password: password
+
+                    });
+
+
+            if (error) {
+                throw error;
             }
 
 
-            /* Loading */
+            loginMessage.textContent =
+                "Login successful! Redirecting...";
 
-            loginBtn.classList.add("loading");
+            loginMessage.style.color =
+                "#00d9ff";
+
+
+            setTimeout(() => {
+
+                window.location.href =
+                    "dashboard.html";
+
+            }, 1000);
+
+
+        } catch (error) {
+
+            console.error(error);
+
+            loginMessage.textContent =
+                "Login failed. Check your email and password.";
+
+            loginMessage.style.color =
+                "#ff6b6b";
+
+
+        } finally {
+
+            loginBtn.disabled = false;
 
             loginBtnText.textContent =
-                "Signing In...";
-
-
-            setTimeout(
-                function () {
-
-                    loginBtn.classList.remove(
-                        "loading"
-                    );
-
-                    loginBtnText.textContent =
-                        "Sign In";
-
-
-                    loginMessage.textContent =
-                        "Demo login successful! ✅";
-
-
-                    loginMessage.style.color =
-                        "#00d9ff";
-
-
-                },
-                1200
-            );
+                "Sign In";
 
         }
-    );
 
+    });
 
-    /* Forgot password */
-
-    const forgotPassword =
-        document.getElementById(
-            "forgotPassword"
-        );
-
-
-    forgotPassword.addEventListener(
-        "click",
-        function (event) {
-
-            event.preventDefault();
-
-            loginMessage.textContent =
-                "Password recovery will be available after backend setup.";
-
-            loginMessage.style.color =
-                "#00d9ff";
-
-        }
-    );
-
-
-    /* Create account */
-
-    const signupLink =
-        document.getElementById(
-            "signupLink"
-        );
-
-
-    signupLink.addEventListener(
-        "click",
-        function (event) {
-
-            event.preventDefault();
-
-            loginMessage.textContent =
-                "Signup page will be added next.";
-
-            loginMessage.style.color =
-                "#00d9ff";
-
-        }
-    );
-
-}
