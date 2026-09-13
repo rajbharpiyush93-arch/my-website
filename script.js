@@ -338,10 +338,10 @@ document.getElementById("year")
    SUPABASE CONFIG
 ========================================= */
 
-const SUPABASE_URL = "YAHAN_PROJECT_URL_DALO";
+const SUPABASE_URL = "https://rdekemmbiqayqbpazioh.supabase.co";
 
 const SUPABASE_PUBLISHABLE_KEY =
-    "YAHAN_PUBLISHABLE_KEY_DALO";
+    "sb_publishable_n_W-Vj6g-KipsoJDoap4vQ_MPk8r49n";
 
 
 const { createClient } = window.supabase;
