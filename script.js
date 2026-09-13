@@ -330,3 +330,176 @@ contactForm.addEventListener(
 document.getElementById("year")
     .textContent =
     new Date().getFullYear();
+/* =================================
+   LOGIN PAGE
+================================= */
+
+const loginForm =
+    document.getElementById("loginForm");
+
+
+if (loginForm) {
+
+    const passwordInput =
+        document.getElementById("loginPassword");
+
+    const showPassword =
+        document.getElementById("showPassword");
+
+    const loginMessage =
+        document.getElementById("loginMessage");
+
+    const loginBtn =
+        document.getElementById("loginBtn");
+
+    const loginBtnText =
+        document.getElementById("loginBtnText");
+
+
+    /* Show / Hide password */
+
+    showPassword.addEventListener(
+        "click",
+        function () {
+
+            if (
+                passwordInput.type ===
+                "password"
+            ) {
+
+                passwordInput.type =
+                    "text";
+
+                showPassword.textContent =
+                    "🙈";
+
+            } else {
+
+                passwordInput.type =
+                    "password";
+
+                showPassword.textContent =
+                    "👁";
+
+            }
+
+        }
+    );
+
+
+    /* Login */
+
+    loginForm.addEventListener(
+        "submit",
+        function (event) {
+
+            event.preventDefault();
+
+
+            const email =
+                document
+                    .getElementById("loginEmail")
+                    .value
+                    .trim();
+
+
+            const password =
+                passwordInput.value;
+
+
+            if (!email || !password) {
+
+                loginMessage.textContent =
+                    "Please enter email and password.";
+
+                loginMessage.style.color =
+                    "#ff6b6b";
+
+                return;
+
+            }
+
+
+            /* Loading */
+
+            loginBtn.classList.add("loading");
+
+            loginBtnText.textContent =
+                "Signing In...";
+
+
+            setTimeout(
+                function () {
+
+                    loginBtn.classList.remove(
+                        "loading"
+                    );
+
+                    loginBtnText.textContent =
+                        "Sign In";
+
+
+                    loginMessage.textContent =
+                        "Demo login successful! ✅";
+
+
+                    loginMessage.style.color =
+                        "#00d9ff";
+
+
+                },
+                1200
+            );
+
+        }
+    );
+
+
+    /* Forgot password */
+
+    const forgotPassword =
+        document.getElementById(
+            "forgotPassword"
+        );
+
+
+    forgotPassword.addEventListener(
+        "click",
+        function (event) {
+
+            event.preventDefault();
+
+            loginMessage.textContent =
+                "Password recovery will be available after backend setup.";
+
+            loginMessage.style.color =
+                "#00d9ff";
+
+        }
+    );
+
+
+    /* Create account */
+
+    const signupLink =
+        document.getElementById(
+            "signupLink"
+        );
+
+
+    signupLink.addEventListener(
+        "click",
+        function (event) {
+
+            event.preventDefault();
+
+            loginMessage.textContent =
+                "Signup page will be added next.";
+
+            loginMessage.style.color =
+                "#00d9ff";
+
+        }
+    );
+
+}
