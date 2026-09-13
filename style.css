@@ -187,6 +187,18 @@ button {
 
 
 .nav-links a:hover::after {
+   .login-nav-btn {
+    padding: 8px 16px;
+    border: 1px solid #00d9ff;
+    border-radius: 8px;
+    color: #00d9ff !important;
+    transition: all 0.3s ease;
+}
+
+.login-nav-btn:hover {
+    background: #00d9ff;
+    color: #050816 !important;
+}
 
     width: 100%;
 
