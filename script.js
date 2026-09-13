@@ -486,4 +486,171 @@ if (loginForm) {
         }
 
     });
+   /* =========================================
+   REAL SIGNUP
+========================================= */
+
+const signupForm =
+    document.getElementById("signupForm");
+
+
+if (signupForm) {
+
+    const emailInput =
+        document.getElementById("signupEmail");
+
+    const passwordInput =
+        document.getElementById("signupPassword");
+
+    const confirmPasswordInput =
+        document.getElementById("confirmPassword");
+
+    const showPassword =
+        document.getElementById("showSignupPassword");
+
+    const signupMessage =
+        document.getElementById("signupMessage");
+
+    const signupBtn =
+        document.getElementById("signupBtn");
+
+    const signupBtnText =
+        document.getElementById("signupBtnText");
+
+
+    /* SHOW / HIDE PASSWORD */
+
+    showPassword.addEventListener("click", () => {
+
+        if (passwordInput.type === "password") {
+
+            passwordInput.type = "text";
+
+            showPassword.textContent = "🙈";
+
+        } else {
+
+            passwordInput.type = "password";
+
+            showPassword.textContent = "👁";
+
+        }
+
+    });
+
+
+    /* SIGNUP */
+
+    signupForm.addEventListener(
+        "submit",
+        async (event) => {
+
+            event.preventDefault();
+
+
+            const email =
+                emailInput.value.trim();
+
+            const password =
+                passwordInput.value;
+
+            const confirmPassword =
+                confirmPasswordInput.value;
+
+
+            /* CHECK PASSWORD */
+
+            if (password !== confirmPassword) {
+
+                signupMessage.textContent =
+                    "Passwords do not match.";
+
+                signupMessage.style.color =
+                    "#ff6b6b";
+
+                return;
+            }
+
+
+            if (password.length < 6) {
+
+                signupMessage.textContent =
+                    "Password must be at least 6 characters.";
+
+                signupMessage.style.color =
+                    "#ff6b6b";
+
+                return;
+            }
+
+
+            signupBtn.disabled = true;
+
+            signupBtnText.textContent =
+                "Creating Account...";
+
+            signupMessage.textContent = "";
+
+
+            try {
+
+                const { data, error } =
+                    await supabaseClient.auth.signUp({
+
+                        email: email,
+
+                        password: password,
+
+                        options: {
+
+                            emailRedirectTo:
+                                window.location.origin +
+                                "/my-website/login.html"
+
+                        }
+
+                    });
+
+
+                if (error) {
+
+                    throw error;
+
+                }
+
+
+                signupMessage.textContent =
+                    "Account created! Check your email to verify your account.";
+
+                signupMessage.style.color =
+                    "#00d9ff";
+
+
+                signupForm.reset();
+
+
+            } catch (error) {
+
+                console.error(error);
+
+                signupMessage.textContent =
+                    error.message;
+
+                signupMessage.style.color =
+                    "#ff6b6b";
+
+
+            } finally {
+
+                signupBtn.disabled = false;
+
+                signupBtnText.textContent =
+                    "Create Account";
+
+            }
+
+        }
+    );
+
+}
 
