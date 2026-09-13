@@ -1,1 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+          content="Secure User Dashboard">
+
+    <title>Dashboard | Piyush Rajbhar</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body class="login-page">
+
+    <div class="login-bg"></div>
+    <div class="login-particles"></div>
+
+
+    <main class="login-container">
+
+        <div class="login-card">
+
+            <div class="login-logo">
+                P<span>.</span>
+            </div>
+
+
+            <div class="login-header">
+
+                <h1>Welcome 🎉</h1>
+
+                <p id="userEmail">
+                    Checking your account...
+                </p>
+
+            </div>
+
+
+            <div style="text-align:center;">
+
+                <p style="color:#aaa; margin-bottom:25px;">
+                    You are successfully logged in.
+                </p>
+
+
+                <button
+                    id="logoutBtn"
+                    class="login-btn"
+                    type="button"
+                >
+                    Logout
+                </button>
+
+
+                <br><br>
+
+
+                <a
+                    href="index.html"
+                    class="back-home"
+                    style="
+                        position:static;
+                        display:inline-block;
+                    "
+                >
+                    ← Back to Portfolio
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- SUPABASE -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="script.js"></script>
+
+
+    <script>
+
+        /* =================================
+           DASHBOARD SESSION CHECK
+        ================================= */
+
+        async function checkUser() {
+
+            const {
+                data: {
+                    user
+                }
+            } =
+                await supabaseClient.auth.getUser();
+
+
+            /*
+             * If user is NOT logged in,
+             * send them back to login.
+             */
+
+            if (!user) {
+
+                window.location.href =
+                    "login.html";
+
+                return;
+
+            }
+
+
+            /*
+             * Show logged-in email
+             */
+
+            document.getElementById(
+                "userEmail"
+            ).textContent =
+                user.email;
+
+        }
+
+
+        checkUser();
+
+
+
+        /* =================================
+           LOGOUT
+        ================================= */
+
+        document
+            .getElementById("logoutBtn")
+            .addEventListener(
+                "click",
+                async () => {
+
+                    const {
+                        error
+                    } =
+                        await supabaseClient.auth
+                            .signOut();
+
+
+                    if (error) {
+
+                        alert(
+                            "Logout failed: " +
+                            error.message
+                        );
+
+                        return;
+
+                    }
+
+
+                    window.location.href =
+                        "login.html";
+
+                }
+            );
+
+    </script>
+
+
+</body>
+
+</html>
